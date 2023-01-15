@@ -1,0 +1,26 @@
+{
+  "name": "todo-node-section2",
+  "version": "1.0.0",
+  "description": "everything about node ",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexisFereira/todo-node.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Alexis Fereira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexisFereira/todo-node/issues"
+  },
+  "homepage": "https://github.com/AlexisFereira/todo-node#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
