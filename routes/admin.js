@@ -3,6 +3,8 @@ const router = express.Router();
 const path = require('path');
 const rootdir = require('../util/path');
 
+const products = [];
+
 router.get('/add-product', (req, res) => {
   // res.send(
   //   '<form action="/admin/product" method="POST"> <input type="text" name="title"/> <button>Add product</button></form>'
@@ -11,8 +13,10 @@ router.get('/add-product', (req, res) => {
 });
 
 router.post('/product', (req, res) => {
-  console.log(req.body);
+  const product = req.body;
+  products.push(product);
   res.redirect('/');
 });
 
-module.exports = router;
+exports.routes = router;
+exports.products = products;
