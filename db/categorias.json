@@ -1,0 +1,75 @@
+{
+  "categorias": [
+    {
+      "id": "f9de5f0e-9689-11ed-a1eb-0242ac120002",
+      "name": "Agricultura, plantaciones, otros sectores rurales"
+    },
+    {
+      "id": "f9de65b2-9689-11ed-a1eb-0242ac120002",
+      "name": "Alimentación, bebidas, tabaco "
+    },
+    {"id": "f9de674c-9689-11ed-a1eb-0242ac120002", "name": "Comercio"},
+    {"id": "f9de6b66-9689-11ed-a1eb-0242ac120002", "name": "Construcción"},
+    {"id": "f9de6d46-9689-11ed-a1eb-0242ac120002", "name": "Educación"},
+    {
+      "id": "f9de6efe-9689-11ed-a1eb-0242ac120002",
+      "name": "Fabricación de material de transporte"
+    },
+    {
+      "id": "f9de72e6-9689-11ed-a1eb-0242ac120002",
+      "name": "Hotelería, restauración, turismo"
+    },
+    {
+      "id": "f9de748a-9689-11ed-a1eb-0242ac120002",
+      "name": "Industrias químicas"
+    },
+    {
+      "id": "f9de75fc-9689-11ed-a1eb-0242ac120002",
+      "name": "Ingenieria mecánica y eléctria"
+    },
+    {
+      "id": "f9de7764-9689-11ed-a1eb-0242ac120002",
+      "name": "Medios de comunicación, cultura, gráficos"
+    },
+    {
+      "id": "1019bd04-968a-11ed-a1eb-0242ac120002",
+      "name": "Minería (carbón, otra minería)"
+    },
+    {
+      "id": "1019c088-968a-11ed-a1eb-0242ac120002",
+      "name": "Petroleo y producción de gas, refinación de petroleo"
+    },
+    {
+      "id": "1019c236-968a-11ed-a1eb-0242ac120002",
+      "name": "Producción de metales básicos"
+    },
+    {
+      "id": "1019c3bc-968a-11ed-a1eb-0242ac120002",
+      "name": "Servicios de correos y de telecomunicaciones"
+    },
+    {
+      "id": "1019c57e-968a-11ed-a1eb-0242ac120002",
+      "name": "Servicios de salud"
+    },
+    {
+      "id": "1019c722-968a-11ed-a1eb-0242ac120002",
+      "name": "Servicios públicos (agua, gas, electricidad)"
+    },
+    {
+      "id": "1019c8b2-968a-11ed-a1eb-0242ac120002",
+      "name": "Silvicultura, madera, celulosa, papel"
+    },
+    {
+      "id": "1019ca2e-968a-11ed-a1eb-0242ac120002",
+      "name": "Textiles, vestido, cuero, calzado"
+    },
+    {
+      "id": "1019cfba-968a-11ed-a1eb-0242ac120002",
+      "name": "Transporte (inluyendo aviación civil, ferrocarriles, transporte por carretera)"
+    },
+    {
+      "id": "1019d154-968a-11ed-a1eb-0242ac120002",
+      "name": "Transporte marítimo, puertos, pesca, transporte interior"
+    }
+  ]
+}
