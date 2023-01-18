@@ -1,0 +1,26 @@
+<%- include('layouts/header'); %>
+<div class="py-4">
+  <h1 class="fw-bolder text-tertiary">My products</h1>
+  <p>List of products...</p>
+</div>
+
+<section class="col-12 px-0">
+  <div class="row align-items-stretch">
+    <% products.forEach(function(product){ %>
+      <div class="col col-sm-6 col-md-4 col-lg-3 mb-3 pb-3">
+        <a href="/admin/<%= product.id %>" class="card h-100 shadow-sm pointer">
+          <div class="cont-image"> 
+            <img src="./img/products/<%= product.image %>.jpeg" alt="product01" class="px-0">
+          </div>
+          <div class="text p-3">
+             <h2 class="fs-4 fw-semibold"><%= product.title %> <%= product.image %></h2> 
+             <p class="text-secondary mb-0 lh-sm"><%= product.description %></p>
+             <small class="fw-bold text-secondary"><%= product.category %></small> 
+             <p class="fw-bold text-end mb-0 fs-4">$ <%= product.price %></p>
+          </div>
+        </a> 
+      </div> 
+    <% }); %>
+  </div>
+</section>
+<%- include('layouts/footer'); %>

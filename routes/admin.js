@@ -17,8 +17,19 @@ router.get('/add-product', (req, res) => {
   });
 });
 
+router.get('/:id', (req, res) => {
+  const id = req.params.id;
+  const product = products.find(product => product.id === id);
+  res.render('product', {
+    docTitle: product.name,
+    product,
+  });
+});
+
 router.post('/product', (req, res) => {
   const product = req.body;
+  product.id = 'id' + Math.random().toString(16).slice(2);
+
   products.push(product);
   res.redirect('/');
 });

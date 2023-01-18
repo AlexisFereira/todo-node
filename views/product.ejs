@@ -1,0 +1,15 @@
+<%- include('layouts/header'); %>
+<div class="row">
+  <div class="col col-md-8 col-lg-9 card px-0 shadow-lg">
+    <div class="product-detail-image">
+      <img src="/img/products/<%= product.image %>.jpeg" alt="">
+    </div>
+    <div class="p-3">
+      <h1 class="fs-3 fw-bolder"><%= product.title %></h1>
+      <p class="mb-0"><%= product.description %></p>
+      <small class="fw-bold"><%= product.category %></small>
+    </div>
+  </div>
+  <div class="col col-md-4 col-lg-3"></div>
+</div>
+<%- include('layouts/footer'); %>

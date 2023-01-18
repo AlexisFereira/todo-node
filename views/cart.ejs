@@ -1,0 +1,37 @@
+<%- include('layouts/header'); %>
+  <div class="row">
+    <div class="py-4">
+      <h1 class="fw-bold text-tertiary">Check your items</h1>
+    </div>
+    <div class="col-12 col-md-9 card mb-3 py-3">
+    
+      <div class="d-flex flex-row col-12 p-1 border">
+        <div class="image-cart-item col-2 border bg-primary">
+          <img src="img/products/01.jpeg" alt="" class="col-12">
+        </div>
+        <div class="col px-3 py-2">
+          <h2 class="fs-4 fw-semibold">product title</h2>
+          <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia animi eligendi alias
+            ducimus, similique in ullam ex aperiam esse ad dolor quasi nisi totam. Omnis voluptas doloremque impedit cum
+            vero?</p>
+        </div>
+        <div class="col-auto d-flex align-items-center">
+          <button class="h-100 btn btn-outline-secondary" disabled>-</button>
+          <div class="px-2"> 1 </div>
+          <button class="h-100 btn btn-outline-secondary">+</button>
+          <div class="border-left ms-2 ps-2 h-100">
+            <button class="h-100 btn btn-outline-danger"> X </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-3">
+      <div class="card p-3">
+        <h2 class="fs-5 fw-bolder">Total a pagar:</h2>
+        <h3>$0.0</h3>
+        <button class="btn btn-primary">Purchase</button>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('layouts/footer'); %>
