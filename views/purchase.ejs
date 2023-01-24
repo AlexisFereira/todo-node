@@ -1,0 +1,82 @@
+<%- include('includes/header'); %>
+    <h1 class="fw-semibold fs-2 py-4">Ingresa tus datos de para realizar tu compra.</h1>
+    <div class="col col-lg-9">
+      <div class="card p-3 shadow-lg">
+        <form action="/add-order" method="POST" class="w-100">
+          <div class="row">
+            <div class="col-12 col-md-6 mb-3">
+              <label for="" class="form-label">Name:</label>
+              <input type="text" name="name" class="form-control w-100">
+            </div>
+            <div class="col-12 col-md-6 mb-3">
+              <label for="" class="form-label">Last name:</label>
+              <input type="text" name="lastname" class="form-control w-100">
+            </div>
+            <div class="col-12 col-md-6 mb-3">
+              <label for="" class="form-label">Email:</label>
+              <input type="text" name="email" class="form-control w-100">
+            </div>
+            <div class="col-12 col-md-6 mb-3">
+              <label for="" class="form-label">Phone:</label>
+              <input type="text" name="phone" class="form-control w-100">
+            </div>
+            <div class="col-12 mb-3">
+              <label for="" class="form-label">Address:</label>
+              <input type="text" name="address" class="form-control w-100">
+            </div>
+            <div class="col-12 mb-3">
+              <label for="" class="form-label">Include delivey:</label>
+              <div class="d-flex">
+                <div class="form-check col-auto pe-4">
+                  <input class="form-check-input" value="yes" type="radio" name="delivery" id="flexRadioDefault1">
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    Yes, Include it.
+                  </label>
+                </div>
+                <div class="form-check col-auto">
+                  <input class="form-check-input" value="no" type="radio" name="delivery" id="flexRadioDefault2" checked>
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    No indluded.
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="" class="form-label">Payment method:</label>
+              <div class="d-flex">
+                <div class="form-check col-auto pe-4">
+                  <input class="form-check-input" value="yes" type="radio" name="paymentMethod" id="flexRadioDefault1">
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    Cash.
+                  </label>
+                </div>
+                <div class="form-check col-auto pe-4">
+                  <input class="form-check-input" value="no" type="radio" name="paymentMethod" id="flexRadioDefault2" checked>
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    TDC
+                  </label>
+                </div>
+                <div class="form-check col-auto">
+                  <input class="form-check-input" value="no" type="radio" name="paymentMethod" id="flexRadioDefault2" checked>
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    Bank Transfer
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="w-100 pt-3 mt-3 border-top">
+            <div class="row">
+              <div class="col-auto">
+                <button type="button" class="btn btn-link">Cancelar </button>
+              </div>
+              <div class="col-auto">
+                <button class="btn-lg btn btn-primary">Confirm order</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+<%- include('includes/footer'); %>
+

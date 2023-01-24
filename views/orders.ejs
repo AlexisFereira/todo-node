@@ -1,0 +1,46 @@
+<%- include('includes/header'); %>
+
+<% if(orders.length){%>
+  <h1 class="py-4 fs-4 fw-bolder">Orders list(<%= orders.length%>)</h1>
+  <div class="w-100 card p-3 shadow-lg">
+
+    <table class="table table-striped-columns">
+      <thead>
+        <t>
+          <th>Order ID</th>
+          <th>Client</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Products</th>
+          <th>Created At</th>
+          <th>State</th>
+          <th>Address</th>
+          <th>Total</th>
+          <th></th>
+        </t>
+      </thead>
+      <tbody>
+        <% orders.forEach(function(order){%> 
+          <tr>
+            <td class=""> <%= order.id.substring(0,5) %> </td>
+            <td class=""> <%= order.name%> <%= order.lastname%></td>
+            <td class=""> <%= order.phone%></td>
+            <td class=""> <%= order.email%></td>
+            <td class=""> <%= order.products.length%> (<%= order.articlesAmount%> articles)</td>
+            <td> <%= order.date%></td>
+            <td class="text-uppercase fw-bolder"> <%= order.state%></td>
+            <td class=""> <%= order.address%></td>
+            <td class="">$<%= order.total%> COP</td>
+            <td class=""><button onclick="getOrderDetail('<%= order.id %>')" class="btn btn-sm btn-info">View</button></td>
+          </tr>
+          <% })%> 
+      </tbody>
+    </table>
+   
+  </div>
+<%}else{%>
+  <div class="w-100 text-center py-4">
+    <h2>Orders not found.</h2>
+  </div>
+<%}%>
+<%- include('includes/footer'); %>

@@ -1,5 +1,7 @@
-<%- include('includes/header'); %>
-<div class="row">
+<%- include('includes/header'); %> <div class="row">
+  <div class="w-100 py-3">
+    <a href="/" class=" col-auto"> < Go back</a>
+  </div>
   <div class="col col-md-8 col-lg-9 card px-0 shadow-lg">
     <div class="product-detail-image">
       <img src="/img/products/<%= product.image %>.jpeg" alt="">
@@ -10,6 +12,23 @@
       <small class="fw-bold"><%= product.category %></small>
     </div>
   </div>
-  <div class="col col-md-4 col-lg-3"></div>
-</div>
-<%- include('includes/footer'); %>
+  <input type="hidden" id="product-price" value="<%=product.price %>">
+  <form class="col col-md-4 col-lg-3" action="/add-to-cart" method="POST">
+    <div class="w-100 card p-3">
+      <div class="d-flex align-items-center mb-2">
+        <button type="button" id="decrease-amount" class="btn btn-outline-secondary col">-</button>
+        <div class="px-3" id="amount-printed">1</div>
+        <button type="button" id="increase-amount" class="btn btn-outline-secondary col">+</button>
+      </div>
+      <div>
+        <small> <span class="fw-bolder">Price per unit: $</span><%= product.price %>.00</small>
+        <p class="fs-3">Total: $<span id="print-total"><%= product.price %> </span> COP</p>
+      </div>
+      <input type="hidden" name="productId" value="<%=product.id%>">  
+      <input type="hidden" id="product-amount" name="quantity" value="1">  
+      <input type="hidden" id="product-total" name="total" value="<%=product.price %>">  
+      <div class="border-top w-100 mb-3"></div>
+      <button class="btn btn-lg btn-primary w-100"> Agregar </button>
+    </div>
+  </form>
+</div> <%- include('includes/footer'); %>

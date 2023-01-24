@@ -1,0 +1,89 @@
+<%- include('includes/header'); %>
+<div class="pt-3">
+  <a href="/orders">< Go back</a>
+</div>
+<div class="d-flex w-100 my-4">
+  <div class="col">
+    <h1><span class="fw-bolder">Order #</span> <%= order.id.substring(0,8)%>...</h1>
+  </div>
+  <div class="col-auto">
+    <div class="btn-group">
+      <button class="text-capitalize btn btn-primary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <%= order.state%>
+      </button>
+      <ul class="dropdown-menu">
+        <li><button class="text-capitalize dropdown-item" type="button">Pendent</button></li>
+        <li><button class="text-capitalize dropdown-item" type="button">Active</button></li>
+        <li><button class="text-capitalize dropdown-item" type="button">Rejected</button></li>
+        <li><button class="text-capitalize dropdown-item" type="button">Closed</button></li>
+        <li><button class="text-capitalize dropdown-item" type="button">Canceled</button></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="w-100 mb-4">
+  <div class="shadow-lg card w-100 p-3">
+    <div class="border-bottom">
+      <h4>Products list</h4>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Name</th>
+          <th scope="col">Price per unit</th>
+          <th scope="col">Units</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% order.products.forEach(function(product){%>
+          <tr>
+            <th scope="row">
+              <img src="/img/products/<%= product.image%>.jpeg" alt="" width="50px" height="auto">
+            </th>
+            <td><%= product.title%></td>
+            <td>$<%= product.price%> COP</td>
+            <td><%= product.quantity%></td>
+            <td>$<%= product.total%> COP</td>
+          </tr>
+         <%})%>
+      </tbody>
+    </table>
+    
+  </div>
+</div>
+<div class="w-100 mb-4">
+  <div class="card p-3 shadow-lg">
+    <h4>Client info</h4>
+    <div class="px-3 w-100 border-top pt-3">
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-4">
+          <small class="fw-bolder">Name:</small>
+          <p><%= order.name%> <%= order.lastname%></p>
+        </div>
+        <div class="col-12 col-md-12 col-lg-4">
+          <small class="fw-bolder">Phone:</small>
+          <p><%= order.phone%> </p>
+        </div>
+        <div class="col-12 col-md-12 col-lg-4">
+          <small class="fw-bolder">Email:</small>
+          <p><%= order.email%> </p>
+        </div>
+        <div class="col-12 col-md-12 col-lg-4">
+          <small class="fw-bolder">Address:</small>
+          <p><%= order.address%> </p>
+        </div>
+        <div class="col-12 col-md-12 col-lg-4">
+          <small class="fw-bolder">Payment Method:</small>
+          <p><%= order.id%> </p>
+        </div>
+        <div class="col-12 col-md-12 col-lg-4">
+          <small class="fw-bolder">Order created at:</small>
+          <p><%= order.date%> </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('includes/footer'); %>

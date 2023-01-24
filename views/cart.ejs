@@ -1,37 +1,46 @@
-<%- include('includes/header'); %>
-  <div class="row">
-    <div class="py-4">
-      <h1 class="fw-bold text-tertiary">Check your items</h1>
-    </div>
-    <div class="col-12 col-md-9 card mb-3 py-3">
-    
-      <div class="d-flex flex-row col-12 p-1 border">
-        <div class="image-cart-item col-2 border bg-primary">
-          <img src="img/products/01.jpeg" alt="" class="col-12">
-        </div>
-        <div class="col px-3 py-2">
-          <h2 class="fs-4 fw-semibold">product title</h2>
-          <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia animi eligendi alias
-            ducimus, similique in ullam ex aperiam esse ad dolor quasi nisi totam. Omnis voluptas doloremque impedit cum
-            vero?</p>
-        </div>
-        <div class="col-auto d-flex align-items-center">
-          <button class="h-100 btn btn-outline-secondary" disabled>-</button>
-          <div class="px-2"> 1 </div>
-          <button class="h-100 btn btn-outline-secondary">+</button>
-          <div class="border-left ms-2 ps-2 h-100">
-            <button class="h-100 btn btn-outline-danger"> X </button>
-          </div>
+<%- include('includes/header'); %> <div class="row">
+  <div class="py-4">
+    <a href="/" class="mb-3 d-inline-block"> < Go back</a>
+    <h1 class="fw-bold text-tertiary">Check your items</h1>
+  </div>
+  <div class="col-12 col-md-9 card mb-3 py-3 shadow-lg"> <% if (cart.products.length) {%>
+    <% cart.products.forEach(function(product){ %> <div class="d-flex flex-row col-12 p-1 border"
+      style="margin-bottom: -1px;">
+      <div class="image-cart-item col-auto">
+        <img src="img/products/<%= product.image %>.jpeg" alt="" class="col-12">
+      </div>
+      <div class="col px-3 py-2 d-flex">
+        <h2 class="fs-4 fw-semibold col mb-0"><%= product.title%></h2>
+        <div class="col-auto">
+          <p class="mb-0 text-end">Price per unit: $<%= product.price %> COP</p>
+          <p class="text-end fs-5 mb-0 fw-bolder">Total: $<%= product.total %> COP</p>
         </div>
       </div>
+      <div class="col-auto d-flex align-items-center">
+        <button <% if(product.quantity == 1){%> disabled <%} %> onclick="handlerQuantityProduct('<%= product.id%>',false)" class="h-100 btn btn-outline-secondary" id="cartitem-decrease-btn">-</button>
+        <div class="px-2"> <%= product.quantity %> </div>
+        <button onclick="handlerQuantityProduct('<%= product.id%>',true)" class="h-100 btn btn-outline-secondary" id="cartitem-increase-btn">+</button>
+        <div class="border-left ms-2 ps-2 h-100" >
+          <input type="hidden" name="id" value="<%= product.id%>">
+          <button class="h-100 btn btn-outline-danger" onclick="removeProduct('<%= product.id%>')"> X </button>
+        </div>
+      </div>
+    </div> <% }); %> <%} else {%> 
+      <div class="text-center w-100 pt-3">
+        <h2>Your cart is empty.</h2> 
+        <a href="/">Start adding to your cart!</a>
+      </div>
+      <%}%>  
     </div>
     <div class="col-12 col-md-3">
       <div class="card p-3">
         <h2 class="fs-5 fw-bolder">Total a pagar:</h2>
-        <h3>$0.0</h3>
-        <button class="btn btn-primary">Purchase</button>
-      </div>
-    </div>
+        <h3 class="fw-bolder">$<%=cart.total%> COP</h3>
+    <small><%= cart.products.length%> Product / <%= cart.articlesAmount%> articles</small>
+    <button class="btn btn-primary mt-2" onclick="goPurchase()" <% if(cart.total === 0){%>disabled <%}%></button>Purchase</button>
   </div>
 </div>
+</div>
+</div> 
+<script src="/js/cart.js"></script>
 <%- include('includes/footer'); %>
