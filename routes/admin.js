@@ -1,38 +1,42 @@
 const express = require('express');
+const Product = require('../models/product');
 const router = express.Router();
-const path = require('path');
-const rootdir = require('../util/path');
+const productCtrl = require('./../controllers/products');
 const categories = require('./../db/categorias.json');
 
 const products = [];
 
 router.get('/add-product', (req, res) => {
-  // res.send(
-  //   '<form action="/admin/product" method="POST"> <input type="text" name="title"/> <button>Add product</button></form>'
-  // );
-  //res.sendFile(path.join(rootdir, 'views', 'add-product.html'));
   res.render('add-product', {
     docTitle: 'Add new product',
     categories: categories.categorias,
+    itemsInCart: req.itemsInCart,
+    orderList: req.orderAmount,
+    editing: false,
   });
 });
 
-router.get('/:id', (req, res) => {
+router.get('/edit/:id', (req, res) => {
   const id = req.params.id;
-  const product = products.find(product => product.id === id);
-  res.render('product', {
-    docTitle: product.name,
-    product,
+  Product.fetchById(id, product => {
+    res.render('add-product', {
+      docTitle: 'Edit Product',
+      categories: categories.categorias,
+      itemsInCart: req.itemsInCart,
+      orderList: req.orderAmount,
+      editing: true,
+      dataProduct: product,
+    });
   });
 });
 
-router.post('/product', (req, res) => {
-  const product = req.body;
-  product.id = 'id' + Math.random().toString(16).slice(2);
+router.get('/:id', productCtrl.getProduct);
 
-  products.push(product);
-  res.redirect('/');
-});
+router.post('/product', productCtrl.addProduct);
+
+router.post('/editProduct', productCtrl.updateProduct);
+
+router.delete('/deleteProduct/:id', productCtrl.deleteProduct);
 
 exports.routes = router;
 exports.products = products;

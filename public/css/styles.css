@@ -35,3 +35,10 @@ main {
   object-fit: contain;
 }
 
+.image-cart-item img {
+  height: 80px;
+  width: 80px;
+  object-fit: contain;
+  margin: auto;
+}
+

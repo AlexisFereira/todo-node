@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const path = require('path');
-const rootdir = require('../util/path');
+const cartCtrl = require('../controllers/cart');
 
-router.get('/cart', (req, res) => {
-  //res.sendFile(path.join(rootdir, 'views', 'cart.html'));
-  res.render('cart', {docTitle: 'Cart'});
-});
+router.put('/cart/change-quantity', cartCtrl.updateCart);
+router.get('/cart', cartCtrl.getCart);
+router.post('/add-to-cart', cartCtrl.addProductToCart);
+router.delete('/remove-product/:id', cartCtrl.removeProductFromCart);
+router.get('/cart/purchase', cartCtrl.purchase);
 
 module.exports = router;

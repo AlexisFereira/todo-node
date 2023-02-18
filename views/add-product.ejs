@@ -1,19 +1,25 @@
 <%- include('includes/header'); %> 
-<form action="/admin/product" method="POST"
-     class="col-sm-10 col-md-8 col-lg-6 m-auto">
-     <div class="my-4">
-       <h1 class="fw-bolder">Add new Product</h1>
-       <p>Complete the fields</p>
-     </div>
+<form action="/admin/product" method="POST" class="col-sm-10 col-md-8 col-lg-6 m-auto" id="form_selector">
+    <div class="my-4">
+        <% if (editing) {%>
+        <input type="hidden" value="<%= JSON.stringify(dataProduct) %>" id="dataProduct"/>
+        <input type="hidden" value="<%= dataProduct[0].id %>" name="id"/>
+        <h1 class="fw-bolder">Edit Product</h1
+        <% }else{%>
+        <h1 class="fw-bolder">Add new Product</h1>
+        <% }%>
+      <p>Complete the fields</p>
+    </div>
+     
      <div class="card p-3 shadow-lg">
        <div class="fields row">
          <div class="col-12 mb-2">
            <label for="" class="fw-light">Title or product name:</label>
-           <input type="text" name="title" class="form-control mb-2">
+           <input type="text" name="title" class="form-control mb-2" id="title_field">
            <label for="" class="fw-light">Description:</label>
-           <textarea type="text" name="description" class="form-control mb-2"></textarea>
+           <textarea type="text" name="description" class="form-control mb-2" id="description_field"></textarea>
            <label for="">Select image:</label>
-           <select type="text" name="image" class="form-control">
+           <select type="text" name="image" class="form-control" id="image_field">
              <option value="">Select...</option>
              <option value="01">01</option>
              <option value="02">02</option>
@@ -27,15 +33,15 @@
          </div>
          <div class="col-6 mb-2">
            <label for="" class="fw-light">Price:</label>
-           <input type="number" name="price" class="form-control">
+           <input type="number" name="price" class="form-control" id="price_field">
          </div>
          <div class="col-6 mb-2">
            <label for="" class="fw-light">Stock:</label>
-           <input type="number" name="stock" class="form-control">
+           <input type="number" name="stock" class="form-control" id="stock_field">
          </div>
          <div class="col-6 mb-2">
            <label for="" class="fw-light">Category:</label>
-           <select type="text" name="category" class="form-control">
+           <select type="text" name="category" class="form-control" id="category_field">
              <option value="" disabled selected>Select...</option>
              <option value="service">Type Service</option>
              <option value="product">Type Product</option>
@@ -43,7 +49,7 @@
          </div>
          <div class="col-6 mb-3">
            <label for="" class="fw-light">Sub-category:</label>
-           <select type="text" name="subcategory" class="form-control">
+           <select type="text" name="subcategory" class="form-control" id="subcategory_field">
              <option value="" disabled selected>Select...</option>
              <% categories.forEach(function(category){ %>
              <option value="<%=category.id%>"><%= category.name%></option>
@@ -54,7 +60,14 @@
      </div>
      <div class="pt-4 col-12 text-end">
       <a href="/" class="px-5 mr-3 btn btn-link"> Cancelar </a>
-      <button class="btn btn-primary btn-lg col-md-6 m-auto">Add product</button>
+      <button class="btn btn-primary btn-lg col-md-6 m-auto">
+        <% if (editing) {%>
+          Save
+        <% }else{%>
+          Add product
+        <% }%>
+      </button>
     </div>
    </form> 
+   <script src="/js/editProduct.js"></script>
 <%- include('includes/footer'); %>
