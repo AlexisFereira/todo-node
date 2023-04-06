@@ -8,16 +8,14 @@ const categoryField = document.querySelector('#category_field');
 const subcategoryField = document.querySelector('#subcategory_field');
 const formSelector = document.querySelector('#form_selector');
 
-  if (dataProduct) {
-    formSelector.setAttribute('action', '/admin/editProduct');
-    const data = JSON.parse(dataProduct.value)[0];
-    titleField.value = data.title ? data.title : '';
-    descriptionField.value = data.description ? data.description : '';
-    imageField.value = data.image ? data.image : '';
-    priceField.value = data.price ? data.price : '';
-    stockField.value = data.stock ? data.stock : '';
-    categoryField.value = data.category ? data.category : '';
-    subcategoryField.value = data.subcategory ? data.subcategory : '';
-  }
-
-
+if (dataProduct) {
+  formSelector.setAttribute('action', '/admin/editProduct');
+  const data = JSON.parse(dataProduct.value);
+  titleField.value = data.title ? data.title : '';
+  descriptionField.value = data.description ? data.description : '';
+  imageField.value = data.image ? data.image : '';
+  priceField.value = data.price ? data.price : '';
+  stockField.value = data.stock ? data.stock : '';
+  categoryField.value = data.category ? data.category : '';
+  subcategoryField.value = data.subcategory ? data.subcategory : '';
+}

@@ -9,19 +9,20 @@ function getProducts(req, res) {
       canEdit: true,
       itemsInCart: req.itemsInCart,
       orderList: req.orderAmount || 0,
+      activeLink: 'shop',
     });
   });
 }
 
 function getProduct(req, res) {
   const id = req.params.id;
-  Product.fetchAll(products => {
-    const product = products.filter(product => product.id === id)[0];
-    res.render('product', {
+  Product.fetchById(id, product => {
+    res.render('shop/product', {
       docTitle: product.title,
       product,
       itemsInCart: req.itemsInCart,
       orderList: req.orderAmount,
+      activeLink: 'shop',
     });
   });
 }
@@ -36,24 +37,14 @@ function addProduct(req, res) {
 function deleteProduct(req, res) {
   const id = req.params.id;
   Product.deleteProduct(id, () => {
-    res.render('shop', {
-      docTitle: 'Home',
-      itemsInCart: req.itemsInCart,
-      orderList: req.orderAmount,
-    });
+    res.status(200).send({msj: `${id} elimidado.`});
   });
 }
 
 function updateProduct(req, res) {
   const data = req.body;
-  Product.updateProduct(data, product => {
-    console.log({product});
-    res.render('product', {
-      docTitle: product.name,
-      product,
-      itemsInCart: req.itemsInCart,
-      orderList: req.orderAmount,
-    });
+  Product.updateProduct(data, () => {
+    res.redirect('/');
   });
 }
 

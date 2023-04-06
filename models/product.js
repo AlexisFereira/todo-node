@@ -30,19 +30,11 @@ class Product {
   }
 
   static deleteProduct(id, cb = () => null) {
-    fs.readFile(p, 'utf-8', (err, file) => {
-      if (!err) {
-        this.products = JSON.parse(file);
-      }
-
-      console.log(this.products)
-      this.products = this.products.filter(
-        productItem => productItem.id !== id
-      );
-      console.log(this.products)
-      fs.writeFileSync(p, JSON.stringify(this.products), e => {
-        console.log(e);
-        cb();
+    this.fetchAll(products => {
+      this.products = products.filter(product => product.id !== id);
+      fs.writeFile(p, JSON.stringify(this.products), e => {
+        if (e) console.log(e);
+        cb({msg: 'product deleted.'});
       });
     });
   }
@@ -70,25 +62,18 @@ class Product {
   }
 
   static fetchById(id, cb = () => null) {
-    fs.readFile(p, 'utf-8', (err, file) => {
-      if (err) {
-        this.products = [];
-      }
-      this.products = JSON.parse(file);
+    this.fetchAll(products => {
+      this.products = products;
       if (!this.products.length) cb({});
-      const product = this.products.filter(prod => prod.id === id);
+      const product = this.products.find(prod => prod.id === id);
       cb(product);
     });
   }
 
   static updateProduct(data, cb = () => null) {
-    fs.readFile(p, 'utf-8', (err, file) => {
-      if (err) {
-        this.products = [];
-      }
-      this.products = JSON.parse(file);
-      let newProduct = {};
-      const productUpdated = this.products.map(prod => {
+    this.fetchAll(products => {
+      let newProduct = null;
+      const productUpdated = products.map(prod => {
         if (prod.id === data.id) {
           prod = data;
           newProduct = prod;
@@ -96,10 +81,10 @@ class Product {
         return prod;
       });
       this.products = productUpdated;
-      fs.writeFileSync(p, JSON.stringify(this.products), e => {
-        console.log(e);
+      fs.writeFile(p, JSON.stringify(this.products), e => {
+        if (e) console.log(e);
+        cb(newProduct);
       });
-      cb(newProduct);
     });
   }
 }

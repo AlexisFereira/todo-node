@@ -1,4 +1,4 @@
-<%- include('includes/header'); %>
+<%- include('../includes/header'); %>
 <div class="pt-3">
   <a href="/orders">< Go back</a>
 </div>
@@ -60,19 +60,19 @@
       <div class="row">
         <div class="col-12 col-md-12 col-lg-4">
           <small class="fw-bolder">Name:</small>
-          <p><%= order.name%> <%= order.lastname%></p>
+          <p><%= order.dataBill.name%> <%= order.dataBill.lastname%></p>
         </div>
         <div class="col-12 col-md-12 col-lg-4">
           <small class="fw-bolder">Phone:</small>
-          <p><%= order.phone%> </p>
+          <p><%= order.dataBill.phone%> </p>
         </div>
         <div class="col-12 col-md-12 col-lg-4">
           <small class="fw-bolder">Email:</small>
-          <p><%= order.email%> </p>
+          <p><%= order.dataBill.email%> </p>
         </div>
         <div class="col-12 col-md-12 col-lg-4">
           <small class="fw-bolder">Address:</small>
-          <p><%= order.address%> </p>
+          <p><%= order.dataBill.address%> </p>
         </div>
         <div class="col-12 col-md-12 col-lg-4">
           <small class="fw-bolder">Payment Method:</small>
@@ -86,4 +86,4 @@
     </div>
   </div>
 </div>
-<%- include('includes/footer'); %>
+<%- include('../includes/footer'); %>

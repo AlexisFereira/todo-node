@@ -1,48 +1,59 @@
-const {cart,reset} = require('./cart');
-const uuid = require('uuid').v4;
+const Order = require('../models/order');
+const Cart = require('../models/cart');
 
 const ordersList = [];
 
 function getOrders(req, res) {
-  res.render('orders', {
-    docTitle: 'Orders - ' + ordersList.length,
-    orders: ordersList,
-    itemsInCart: req.itemsInCart,
-    orderList: req.orderAmount,
+  Order.getOrders(ordersList => {
+    res.render('admin/orders', {
+      activeLink: 'orders',
+      docTitle: 'Orders - ' + ordersList.length,
+      itemsInCart: req.itemsInCart,
+      orderList: req.orderAmount,
+      orders: ordersList,
+    });
   });
 }
 
 function getOrder(req, res) {
   const id = req.params.id;
-  const orderData = ordersList.find(orderItem => orderItem.id === id);
-  res.render('order', {
-    docTitle: 'Orders - ' + orderData.id,
-    order: orderData,
-    itemsInCart: req.itemsInCart,
-    orderList: req.orderAmount,
+  Order.getOrder(id, order => {
+    res.render('admin/order', {
+      activeLink: 'orders',
+      docTitle: 'Orders - ' + order.id,
+      itemsInCart: req.itemsInCart,
+      order,
+      orderList: req.orderAmount,
+    });
   });
 }
 
 function addOrder(req, res) {
-  const order = req.body;
-  order.id = uuid();
-  order.total = cart.total;
-  order.articlesAmount = cart.articlesAmount;
-  order.products = cart.products;
-  order.state = 'pendiente';
-  order.date = Date.now();
-  ordersList.push(order);
-  reset();
-  res.redirect('/orders');
+  const {userId} = req;
+  const dataBill = req.body;
+  Cart.getCart(userId, cart => {
+    const {articlesAmount, products, total} = cart;
+    const order = new Order({
+      dataBill,
+      products,
+      articlesAmount,
+      total,
+    });
+    order.save(() => {
+      Cart.reset(userId, () => {
+        res.redirect('/orders');
+      });
+    });
+  });
 }
 function updateOrder(req, res) {}
 function removeOrder(req, res) {}
 
 module.exports = {
-  getOrders,
-  getOrder,
   addOrder,
-  updateOrder,
-  removeOrder,
+  getOrder,
+  getOrders,
   ordersList,
+  removeOrder,
+  updateOrder,
 };

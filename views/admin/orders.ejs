@@ -1,4 +1,4 @@
-<%- include('includes/header'); %>
+<%- include('../includes/header'); %>
 
 <% if(orders.length){%>
   <h1 class="py-4 fs-4 fw-bolder">Orders list(<%= orders.length%>)</h1>
@@ -23,9 +23,9 @@
         <% orders.forEach(function(order){%> 
           <tr>
             <td class=""> <%= order.id.substring(0,5) %> </td>
-            <td class=""> <%= order.name%> <%= order.lastname%></td>
-            <td class=""> <%= order.phone%></td>
-            <td class=""> <%= order.email%></td>
+            <td class=""> <%= order.dataBill.name%> <%= order.dataBill.lastname%></td>
+            <td class=""> <%= order.dataBill.phone%></td>
+            <td class=""> <%= order.dataBill.email%></td>
             <td class=""> <%= order.products.length%> (<%= order.articlesAmount%> articles)</td>
             <td> <%= order.date%></td>
             <td class="text-uppercase fw-bolder"> <%= order.state%></td>
@@ -43,4 +43,4 @@
     <h2>Orders not found.</h2>
   </div>
 <%}%>
-<%- include('includes/footer'); %>
+<%- include('../includes/footer'); %>

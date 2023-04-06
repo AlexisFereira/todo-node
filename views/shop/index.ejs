@@ -1,13 +1,14 @@
-<%- include('includes/header'); %> <section class="col-12 px-0"> <% if(products.length){%> <div class="py-4">
+<%- include('../includes/header'); %> <section class="col-12 px-0"> <% if(products.length){%> <div class="py-4">
     <h1 class="fw-bolder text-tertiary">My products</h1>
     <p>List of products...</p>
   </div>
   <div class="row align-items-stretch"> 
     <% products.forEach(function(product){ %> 
       <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3 pb-3 position-relative">
+        <input type="hidden" value="<%= JSON.stringify(product) %>" id="<%=product.id %>">
         <a href="/admin/<%= product.id %>" class="text-reset card h-100 shadow-sm pointer text-decoration-none">
           <div class="cont-image">
-            <img src="./img/products/<%= product.image %>.jpeg" alt="product01" class="px-0">
+            <img alt="<%= product.title%>" src="./img/products/<%= product.image %>.jpeg" alt="product01" class="px-0">
           </div>
           <div class="text p-3">
             <h2 class="fs-4 fw-semibold"><%= product.title %></h2>
@@ -18,8 +19,8 @@
         </a>
         <div class="position-absolute top-0 px-3 w-100 pt-2 ps-4">
           <div class="row">
-            <button onclick="editProduct('<%= product.id %>')" class="shadow-sm col-auto  me-2 px-4 btn end-0 btn-sm btn-info ">Edit</button>
-        <button onclick="deleteProduct('<%= product.id %>')" class="shadow-sm col-auto  px-4 btn end-0 btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+            <button onclick="editProduct('<%= product.id %>')" class="shadow-sm col-auto  me-2 px-4 btn end-0 btn-sm btn-info "><i class="fa fa-pencil"></i> Edit</button>
+            <button onclick="deleteProduct('<%= product.id %>')" class="shadow-sm col-auto  px-4 btn end-0 btn-sm btn-danger " data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-trash"></i> Delete </button>
           </div>
         </div>
       </div> 
@@ -34,6 +35,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <input type="hidden" id="id-todelete">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -41,14 +43,21 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <div class="row align-items-center">
+          <div class="col-4">
+            <img alt="" id="img-preview" width="100%" height="auto" class="m-auto d-block">
+          </div>
+          <div class="col-8">
+            <h4>Do you want to delete <strong><span id="title-preview"></span></strong> ?</h4>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-link " data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger btn-lg"  data-bs-dismiss="modal" onclick="confirmDelete()">Delete</button>
       </div>
     </div>
   </div>
 </div>
 
-<%- include('includes/footer'); %>
+<%- include('../includes/footer'); %>

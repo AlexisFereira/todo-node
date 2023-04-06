@@ -1,3 +1,3 @@
 function getOrderDetail(id) {
-  window.location.href = 'http://localhost:3000/orders/' + id;
+  window.location.href = 'http://localhost:8040/orders/' + id;
 }

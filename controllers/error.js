@@ -3,6 +3,7 @@ function get404(req, res) {
     docTitle: 'Page not found.',
     itemsInCart: req.itemsInCart,
     orderList: req.orderAmount,
+    activeLink: '',
   });
 }
 

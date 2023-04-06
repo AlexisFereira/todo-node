@@ -1,5 +1,5 @@
 async function removeProduct(id) {
-  await fetch('http://localhost:3000/remove-product/' + id, {
+  await fetch('http://localhost:8040/remove-product/' + id, {
     method: 'DELETE',
   })
     .then(data => data.json())
@@ -9,7 +9,7 @@ async function removeProduct(id) {
 }
 
 async function handlerQuantityProduct(id, increase) {
-  await fetch('http://localhost:3000/cart/change-quantity', {
+  await fetch('http://localhost:8040/cart/change-quantity', {
     method: 'PUT',
     headers: {
       'Content-Type': 'Application/json',
@@ -23,6 +23,6 @@ async function handlerQuantityProduct(id, increase) {
     });
 }
 
-function goPurchase(){
-  window.location.href = '/cart/purchase';
+function goPurchase(id){
+  window.location.href = '/cart/purchase/' + id;
 }

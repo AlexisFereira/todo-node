@@ -1,9 +1,9 @@
-<%- include('includes/header'); %> 
+<%- include('../includes/header'); %> 
 <form action="/admin/product" method="POST" class="col-sm-10 col-md-8 col-lg-6 m-auto" id="form_selector">
     <div class="my-4">
         <% if (editing) {%>
         <input type="hidden" value="<%= JSON.stringify(dataProduct) %>" id="dataProduct"/>
-        <input type="hidden" value="<%= dataProduct[0].id %>" name="id"/>
+        <input type="hidden" value="<%= dataProduct.id %>" name="id"/>
         <h1 class="fw-bolder">Edit Product</h1
         <% }else{%>
         <h1 class="fw-bolder">Add new Product</h1>
@@ -70,4 +70,4 @@
     </div>
    </form> 
    <script src="/js/editProduct.js"></script>
-<%- include('includes/footer'); %>
+<%- include('../includes/footer'); %>

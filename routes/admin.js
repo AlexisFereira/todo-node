@@ -6,26 +6,30 @@ const categories = require('./../db/categorias.json');
 
 const products = [];
 
+router.delete('/deleteProduct/:id', productCtrl.deleteProduct);
+
 router.get('/add-product', (req, res) => {
-  res.render('add-product', {
-    docTitle: 'Add new product',
+  res.render('admin/add-product', {
+    activeLink: 'add-product',
     categories: categories.categorias,
+    docTitle: 'Add new product',
+    editing: false,
     itemsInCart: req.itemsInCart,
     orderList: req.orderAmount,
-    editing: false,
   });
 });
 
 router.get('/edit/:id', (req, res) => {
   const id = req.params.id;
   Product.fetchById(id, product => {
-    res.render('add-product', {
-      docTitle: 'Edit Product',
+    res.render('admin/add-product', {
+      activeLink: 'add-product',
       categories: categories.categorias,
+      dataProduct: product,
+      docTitle: 'Edit Product',
+      editing: true,
       itemsInCart: req.itemsInCart,
       orderList: req.orderAmount,
-      editing: true,
-      dataProduct: product,
     });
   });
 });
@@ -35,8 +39,6 @@ router.get('/:id', productCtrl.getProduct);
 router.post('/product', productCtrl.addProduct);
 
 router.post('/editProduct', productCtrl.updateProduct);
-
-router.delete('/deleteProduct/:id', productCtrl.deleteProduct);
 
 exports.routes = router;
 exports.products = products;
