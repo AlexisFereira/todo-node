@@ -3,7 +3,7 @@
     <div class="my-4">
         <% if (editing) {%>
         <input type="hidden" value="<%= JSON.stringify(dataProduct) %>" id="dataProduct"/>
-        <input type="hidden" value="<%= dataProduct.id %>" name="id"/>
+        <input type="hidden" value="<%= dataProduct._id %>" name="id"/>
         <h1 class="fw-bolder">Edit Product</h1
         <% }else{%>
         <h1 class="fw-bolder">Add new Product</h1>

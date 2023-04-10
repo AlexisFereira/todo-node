@@ -4,6 +4,7 @@ function get404(req, res) {
     itemsInCart: req.itemsInCart,
     orderList: req.orderAmount,
     activeLink: '',
+    isLoggedIn: req.session.isLoggedIn,
   });
 }
 

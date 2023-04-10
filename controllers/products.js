@@ -1,51 +1,78 @@
 const Product = require('../models/product');
-const uuid = require('uuid').v4;
+const Comment = require('../models/comment');
+const moment = require('moment');
 
-function getProducts(req, res) {
-  Product.fetchAll(products => {
-    res.render('shop', {
-      docTitle: 'Wellcome to my shop',
-      products: products || [],
-      canEdit: true,
-      itemsInCart: req.itemsInCart,
-      orderList: req.orderAmount || 0,
-      activeLink: 'shop',
-    });
+async function getProducts(req, res) {
+  const products = await Product.find({});
+  const itemsInCart = req.user ? req.user.cart.items.lenght : 0;
+  res.render('shop', {
+    docTitle: 'Wellcome to my shop',
+    products: products || [],
+    canEdit: true,
+    itemsInCart,
+    orderList: req.orderAmount || 0,
+    activeLink: 'shop',
+    isLoggedIn: req.session.isLoggedIn,
   });
 }
 
-function getProduct(req, res) {
+async function getProduct(req, res) {
   const id = req.params.id;
-  Product.fetchById(id, product => {
-    res.render('shop/product', {
-      docTitle: product.title,
-      product,
-      itemsInCart: req.itemsInCart,
-      orderList: req.orderAmount,
-      activeLink: 'shop',
-    });
+  const product = await Product.findById(id);
+  const commentsList = await Comment.find({productId: product}).populate(
+    'userId'
+  );
+  const comments = await commentsList.map(comment => ({
+    date: moment(comment.date).format('DD / mm / yyyy'),
+    text: comment.text,
+    user: `${comment.userId.name} ${comment.userId.lastname}`,
+  }));
+  const related = await Product.find({
+    $and: [{_id: {$not: {$eq: product._id}}}, {category: product.category}],
+  }).limit(4);
+  const itemsInCart = req.user ? req.user.cart.items.lenght : 0;
+  res.render('shop/product', {
+    docTitle: product.title,
+    product,
+    itemsInCart,
+    orderList: req.orderAmount,
+    activeLink: 'shop',
+    isLoggedIn: req.session.isLoggedIn,
+    related,
+    comments,
   });
 }
-function addProduct(req, res) {
+
+async function addProduct(req, res) {
   const data = req.body;
-  data.id = uuid();
+  data.userId = req.user;
   const product = new Product(data);
-  product.save();
+  await product.save();
   res.redirect('/');
 }
 
-function deleteProduct(req, res) {
+async function deleteProduct(req, res) {
   const id = req.params.id;
-  Product.deleteProduct(id, () => {
-    res.status(200).send({msj: `${id} elimidado.`});
-  });
+  await Product.deleteOne({_id: id});
+  res.status(200).send({msj: `${id} elimidado.`});
 }
 
-function updateProduct(req, res) {
+async function updateProduct(req, res) {
   const data = req.body;
-  Product.updateProduct(data, () => {
-    res.redirect('/');
+  await Product.updateOne({_id: data.id}, data);
+  res.redirect('/');
+}
+
+async function postComment(req, res) {
+  const {body} = req;
+  const comment = new Comment({
+    productId: body.productId,
+    text: body.text,
+    userId: req.session.user._id.toString(),
+    date: Date.now(),
   });
+  await comment.save();
+  res.status(200).json({msg: 'aqui:::'});
 }
 
 module.exports = {
@@ -54,4 +81,5 @@ module.exports = {
   addProduct,
   deleteProduct,
   updateProduct,
+  postComment,
 };

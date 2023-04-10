@@ -4,7 +4,7 @@ const amountVal = document.querySelector('#amount-printed');
 const increaseBtn = document.querySelector('#increase-amount');
 const productAmount = document.querySelector('#product-amount');
 const productTotal = document.querySelector('#product-total');
-const productPrice = document.querySelector('#product-total').value;
+const productPrice = document.querySelector('#product-total').value || 0;
 const printTotal = document.querySelector('#print-total');
 
 decreaseBtn.addEventListener('click', function () {
@@ -47,7 +47,6 @@ function deleteProduct(id) {
 
 async function confirmDelete() {
   const idToDelete = document.getElementById('id-todelete').value;
-  console.log(idToDelete)
   await fetch('http://localhost:8040/admin/deleteProduct/' + idToDelete, {
     method: 'DELETE',
   })

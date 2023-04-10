@@ -1,0 +1,40 @@
+<%- include('../includes/header'); %> 
+<div class="container pt-4">
+  <div class="card p-3 col-md-6 col-lg-4 mx-auto">
+    <form action="/sign-up" method="POST">
+      <h2 class="fw-bolder text-center">Crear Cuenta</h2>
+      <% if(messageError){%>
+        <div class="w-100 badge text-bg-danger mb-3 py-2">
+          <%= messageError%>
+        </div>
+      <%}%>
+      <div class="col mb-2">
+        <label for="">Nombre:</label>
+        <input type="text" class="form-control" name="name" id="">
+      </div>
+      <div class="col mb-2">
+        <label for="">Apellido:</label>
+        <input type="text" class="form-control" name="lastname" id="">
+      </div>
+      <div class="col mb-2">
+        <label for="">Correo:</label>
+        <input type="text" class="form-control" name="email" id="">
+      </div>
+      <div class="col mb-2">
+        <label for="">Contraseña:</label>
+        <input type="password" class="form-control" name="password" id="">
+      </div>
+      <div class="col mb-3">
+        <label for="">Confirmar contraseña:</label>
+        <input type="password" class="form-control" name="confirm-pass" id="">
+      </div>
+      <div class="w-100">
+        <button class="btn btn-primary btn-lg w-100">Enviar</button>
+      </div>
+    </form>
+  </div>
+  <div class="pt-4 text-center">
+    <a href="/login"> <i class="fa fa-arrow-left"></i> Volver a inicio de sesion</a>
+  </div>
+</div>
+<%- include('../includes/footer'); %> 

@@ -19,12 +19,12 @@
             </div>
           </div>
           <div class="col-12 d-flex col-lg-2 align-items-center py-1">
-            <button <% if(product.quantity == 1){%> disabled <%} %> onclick="handlerQuantityProduct('<%= product.id%>',false)" class="h-100 btn btn-outline-secondary col" id="cartitem-decrease-btn">-</button>
+            <button <% if(product.quantity == 1){%> disabled <%} %> onclick="handlerQuantityProduct('<%= product._id%>',false)" class="h-100 btn btn-outline-secondary col" id="cartitem-decrease-btn">-</button>
             <div class="px-2 col text-center"> <%= product.quantity %> </div>
-            <button onclick="handlerQuantityProduct('<%= product.id%>',true)" class="h-100 col btn btn-outline-secondary" id="cartitem-increase-btn">+</button>
+            <button onclick="handlerQuantityProduct('<%= product._id%>',true)" class="h-100 col btn btn-outline-secondary" id="cartitem-increase-btn">+</button>
             <div class="border-left ms-2 ps-2 h-100 col" >
-              <input type="hidden" name="id" value="<%= product.id%>">
-              <button class="h-100 col-12 btn btn-outline-danger" onclick="removeProduct('<%= product.id%>')"> X </button>
+              <input type="hidden" name="id" value="<%= product._id%>">
+              <button class="h-100 col-12 btn btn-outline-danger" onclick="removeProduct('<%= product._id%>')"> X </button>
             </div>
           </div>
         </div> <% }); %> 

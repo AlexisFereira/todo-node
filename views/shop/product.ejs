@@ -1,18 +1,57 @@
-<%- include('../includes/header'); %> <div class="row">
+<%- include('../includes/header'); %> 
+<div class="row">
   <div class="w-100 py-3">
     <a href="/" class=" col-auto"> <i class="fa fa-angle-left"></i> Go back</a>
   </div>
-  <div class="col-12 col-md-8 col-lg-9 mb-3 card px-0 shadow-lg">
-    <div class="product-detail-image">
-      <img src="/img/products/<%= product.image %>.jpeg" alt="">
+  <div class="col-12 col-md-8 col-lg-9 mb-3">
+    <div class="card mb-3">
+      <div class="product-detail-image">
+        <img src="/img/products/<%= product.image %>.jpeg" alt="">
+      </div>
+      <div class="p-3">
+        <h1 class="fs-3 fw-bolder"><%= product.title %></h1>
+        <p class="mb-0"><%= product.description %></p>
+        <small class="fw-bold"><%= product.category %></small>
+      </div>
     </div>
-    <div class="p-3">
-      <h1 class="fs-3 fw-bolder"><%= product.title %></h1>
-      <p class="mb-0"><%= product.description %></p>
-      <small class="fw-bold"><%= product.category %></small>
+    <% if(isLoggedIn){%>
+    <div class="card p-3 shadow-sm mb-3">
+      <div class="comment-box ">
+        <label class="form-label" for="">Leave a comment:</label>
+        <input id="comment-pid" type="hidden" name="productId" value="<%= product._id%>">
+        <textarea id="comment-text" class="form-control mb-3" name="text" id="" cols="30" rows="10"></textarea>
+        <button class="btn btn-primary btn-lg" onclick="sendComment()">Comentar</button>
+      </div>
+    </div>
+    <%}%>
+    <% comments.forEach(function(comment){ %>
+      <div class="d-flex justify-content-between comment flex-wrap p-3">
+        <p class="mb-0 fw-bolder"><%= comment.user %></p> <small><%= comment.date%></small>
+        <p class="w-100"><%= comment.text %></p>
+      </div>
+    <% }); %>
+    <div class="pt-5">
+      <h3 class="fw-bolder mb-3">Estos productos tambien te pueden interezar</h3>  
+      <div class="row">
+        <% related.forEach(function(product){ %> 
+          <div class="p-2 col" >
+            <div class="card w-100 related-product shadow-sm">
+              <a class="image" href="/admin/<%= product._id%>">
+                <img src="/img/products/<%= product.image%>.jpeg" alt="">
+              </a>
+              <a class="text  p-2" href="/admin/<%= product._id%>">
+                <p class="fw-bolder"><%= product.title %></p>
+                <p class="mb-2"><%= product.description%></p>
+                <p class="fw-bolder mb-0 text-end"> $<%= product.price%> COP</p>
+              </a>
+            </div>
+          </div>
+          <% }); %> 
+      </div>
     </div>
   </div>
   <input type="hidden" id="product-price" value="<%=product.price %>">
+  <% if(isLoggedIn){%>
   <form class="col col-md-4 col-lg-3" action="/add-to-cart" method="POST">
     <div class="w-100 card p-3">
       <div class="d-flex align-items-center mb-2">
@@ -31,4 +70,8 @@
       <button class="btn btn-lg btn-primary w-100"> Agregar </button>
     </div>
   </form>
-</div> <%- include('../includes/footer'); %>
+  <%} %>
+  <script src="/js/productView.js"></script>
+</div> 
+
+<%- include('../includes/footer'); %>

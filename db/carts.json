@@ -1,1 +1,34 @@
-[{"id":"257b514e-4315-47b2-b935-a0465b50fddf","userId":"123","products":[{"id":"a271df78-d58d-4396-b0ba-a670a78cee3e","title":"Avatar","description":"avatar la forma del agua, segunda entrega de avatar dirigida por ","image":"07","price":"250","stock":"120","category":"product","subcategory":"f9de65b2-9689-11ed-a1eb-0242ac120002","quantity":1,"total":250},{"id":"15dd0bfb-2471-4edd-8950-0e2a4547032e","title":"Super Mario Bros","description":"taza de café de ceramica, subliminada, color blanco .","image":"02","price":"300","stock":"12","category":"product","subcategory":"f9de65b2-9689-11ed-a1eb-0242ac120002","quantity":12,"total":3600}],"articlesAmount":13,"total":3850,"productsId":[]}]
+[
+  {
+    "id": "257b514e-4315-47b2-b935-a0465b50fddf",
+    "userId": "123",
+    "products": [
+      {
+        "id": "a271df78-d58d-4396-b0ba-a670a78cee3e",
+        "title": "Avatar",
+        "description": "avatar la forma del agua, segunda entrega de avatar dirigida por ",
+        "image": "07",
+        "price": "250",
+        "stock": "120",
+        "category": "product",
+        "subcategory": "f9de65b2-9689-11ed-a1eb-0242ac120002",
+        "quantity": 1,
+        "total": 250
+      },
+      {
+        "id": "15dd0bfb-2471-4edd-8950-0e2a4547032e",
+        "title": "Super Mario Bros",
+        "description": "taza de café de ceramica, subliminada, color blanco .",
+        "image": "02",
+        "price": "300",
+        "stock": "12",
+        "category": "product",
+        "subcategory": "f9de65b2-9689-11ed-a1eb-0242ac120002",
+        "quantity": 12,
+        "total": 3600
+      }
+    ],
+    "articlesAmount": 13,
+    "total": 3850
+  }
+]

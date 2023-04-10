@@ -47,3 +47,19 @@ main {
   font-weight: bold;
 }
 
+.comment-box textarea{
+height: 80px;
+}
+
+.related-product .image{
+  width: 100%;
+}
+.related-product .image img{
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+.comment{
+  background-color: rgba(255,255,255,.7);
+  border-top: 1px solid #d1d1d1;
+}

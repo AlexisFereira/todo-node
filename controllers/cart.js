@@ -1,78 +1,64 @@
-const Cart = require('../models/cart');
-const Product = require('../models/product');
+const cart = {};
 
-const cart = {
-  productsId: [],
-  products: [],
-  articlesAmount: 0,
-  total: 0,
-};
-
-const reset = () => {
-  cart.productsId = [];
-  cart.products = [];
-  cart.articlesAmount = 0;
-  cart.total = 0;
-};
-
-function calculateTotal() {
-  let total = 0;
-  let articles = 0;
-  cart.products.forEach(product => {
-    total = total + parseInt(product.price) * parseInt(product.quantity);
-    articles = parseInt(articles) + parseInt(product.quantity);
-  });
-  cart.total = total;
-  cart.articlesAmount = articles;
-}
-
-function getCart(req, res) {
-  const userId = req.userId;
-  Cart.getCart(userId, cart => {
+async function getCart(req, res) {
+  req.user.populate('cart.items.productId').then(data => {
+    const products = data.cart.items.map(item => ({
+      _id: item.productId._id,
+      quantity: item.quantity,
+      total: item.productId.price * item.quantity,
+      title: item.productId.title,
+      image: item.productId.image,
+      price: item.productId.price,
+      description: item.productId.description,
+    }));
+    cart.products = products;
+    cart.articlesAmount = products.reduce(
+      (acum, index) => acum + index.quantity,
+      0
+    );
+    cart.total = products.reduce(
+      (acumulador, index) => acumulador + index.total,
+      0
+    );
     res.render('shop/cart', {
       docTitle: cart.products.length ? `Cart(${cart.products.length})` : 'Cart',
       cart,
       itemsInCart: cart.products.length,
-      orderList: req.orderAmount,
+      orderList: 0,
       activeLink: 'cart',
+      isLoggedIn: req.session.isLoggedIn,
     });
   });
 }
 
-function addProductToCart(req, res) {
+async function addProductToCart(req, res) {
   const {productId, quantity} = req.body;
-  const {userId} = req;
-  const data = {userId, productId, quantity: parseInt(quantity)};
-  Product.fetchAll(products => {
-    Cart.addProductToCart(data, products, () => {
-      res.redirect('/cart');
-    });
+  req.user.addToCart({
+    productId,
+    quantity,
   });
+  res.redirect('/cart');
 }
 
 function removeProductFromCart(req, res) {
   const id = req.params.id;
-  Cart.removeProductFromCart(req.userId, id, () => {
-    res.status(200).send({removed: true});
-  });
+  req.user.removeFromCart(id);
+  res.status(200).json({msg: `Producto con el ${id} removido`});
 }
 
-function updateCart(req, res) {
+async function updateCart(req, res) {
   const {type, id} = req.body;
-  const {userId} = req;
-  Cart.updateCart(userId, id, type, cart => {
-    res.status(200).json({data: cart});
-  });
+  req.user.updateItemInCart(id, type === 'decrease');
+  res.status(200).json({data: {}});
 }
 
 function purchase(req, res) {
-  const cartId = req.params.id;
   res.render('shop/purchase', {
     docTitle: 'Purchase',
-    itemsInCart: 0,
+    itemsInCart: req.session.user.cart.items.length,
     orderList: req.orderAmount,
     activeLink: 'cart',
-    cartId,
+    isLoggedIn: req.session.isLoggedIn,
   });
 }
 
@@ -83,5 +69,4 @@ module.exports = {
   updateCart,
   purchase,
   cart,
-  reset,
 };

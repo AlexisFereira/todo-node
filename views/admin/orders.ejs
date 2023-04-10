@@ -29,7 +29,7 @@
             <td class=""> <%= order.products.length%> (<%= order.articlesAmount%> articles)</td>
             <td> <%= order.date%></td>
             <td class="text-uppercase fw-bolder"> <%= order.state%></td>
-            <td class=""> <%= order.address%></td>
+            <td class=""> <%= order.dataBill.address%></td>
             <td class="">$<%= order.total%> COP</td>
             <td class=""><button onclick="getOrderDetail('<%= order.id %>')" class="btn btn-sm btn-info">View</button></td>
           </tr>

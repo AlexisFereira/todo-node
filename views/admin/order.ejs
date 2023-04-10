@@ -3,20 +3,22 @@
   <a href="/orders">< Go back</a>
 </div>
 <div class="d-flex w-100 my-4">
+  <input type="hidden" value="<%= order.id%>" id="orderId">
   <div class="col">
     <h1><span class="fw-bolder">Order #</span> <%= order.id.substring(0,8)%>...</h1>
   </div>
   <div class="col-auto">
     <div class="btn-group">
-      <button class="text-capitalize btn btn-primary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <button
+        class="text-capitalize btn <% if(order.state === 'Canceled') {%>btn-secondary<%}%> <% if(order.state === 'Active') {%>btn-primary<%}%> <% if(order.state === 'Pendent') {%>btn-warning<%}%> <% if(order.state === 'Rejected') {%>btn-danger<%}%> <% if(order.state === 'Closed') {%>btn-success<%}%> btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         <%= order.state%>
       </button>
       <ul class="dropdown-menu">
-        <li><button class="text-capitalize dropdown-item" type="button">Pendent</button></li>
-        <li><button class="text-capitalize dropdown-item" type="button">Active</button></li>
-        <li><button class="text-capitalize dropdown-item" type="button">Rejected</button></li>
-        <li><button class="text-capitalize dropdown-item" type="button">Closed</button></li>
-        <li><button class="text-capitalize dropdown-item" type="button">Canceled</button></li>
+        <li><button class="text-capitalize dropdown-item" onclick="changeState('Pendent')" type="button">Pendent</button></li>
+        <li><button class="text-capitalize dropdown-item" onclick="changeState('Active')" type="button">Active</button></li>
+        <li><button class="text-capitalize dropdown-item" onclick="changeState('Rejected')" type="button">Rejected</button></li>
+        <li><button class="text-capitalize dropdown-item" onclick="changeState('Closed')" type="button">Closed</button></li>
+        <li><button class="text-capitalize dropdown-item" onclick="changeState('Canceled')" type="button">Canceled</button></li>
       </ul>
     </div>
   </div>
@@ -86,4 +88,5 @@
     </div>
   </div>
 </div>
+<script src="/js/orders.js"></script>
 <%- include('../includes/footer'); %>
